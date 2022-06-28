@@ -18,11 +18,11 @@ export class Schedule {
   @Column({ type: "date" })
   public day: string;
 
-  @ManyToOne(() => FormOfService, { onDelete: "CASCADE" })
+  @ManyToOne(() => FormOfService, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   public formOfService: FormOfService;
 
-  @ManyToOne(() => Time, { onDelete: "CASCADE" })
+  @ManyToOne(() => Time, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   public time: Time;
 

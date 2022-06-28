@@ -18,12 +18,17 @@ class ScheduleRepository implements IScheduleRepository {
   }
 
   save = async (schedule: Partial<Schedule>) => {
-    await this.ormRepo.save(schedule);
-    return await this.ormRepo.findOneBy({ day: schedule.day });
+    const newSchedule = await this.ormRepo.save(schedule);
+    return await this.ormRepo.findOne({
+      where: { id: newSchedule.id },
+      relations: ["formOfService", "time", "professional", "client"],
+    });
   };
 
   findAll: () => Promise<Array<Schedule>> = async () => {
-    return await this.ormRepo.find();
+    return await this.ormRepo.find({
+      relations: ["formOfService", "time", "professional", "client"],
+    });
   };
 
   findOne = async (payload: object) => {

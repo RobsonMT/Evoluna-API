@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { clientRepo } from "../repositories";
-import { capitalizeFirstLetter, capitalizeWords } from "../utils";
+import { capitalizeFirstLetter, capitalizeWords, formatData } from "../utils";
 import ErrorHTTP from "../errors/ErrorHTTP";
 
 class ClientService {
@@ -25,7 +25,7 @@ class ClientService {
     const client = await clientRepo.save(validated);
 
     return Object.assign(client, {
-      birthDate: client.birthDate.toString().split("-").reverse().join("/"),
+      birthDate: formatData(client.birthDate),
     });
   };
 
@@ -37,7 +37,7 @@ class ClientService {
     for (let client of clientsData) {
       clients.push(
         Object.assign(client, {
-          birthDate: client.birthDate.toString().split("-").reverse().join("/"),
+          birthDate: formatData(client.birthDate) as string,
         })
       );
     }

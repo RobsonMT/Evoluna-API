@@ -16,4 +16,8 @@ const capitalizeWords = (str: string) => {
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
-export { reduceShape, capitalizeWords, capitalizeFirstLetter };
+
+const formatData = (data: Date | string) => {
+  return data.toString().split("-").reverse().join("/");
+};
+export { reduceShape, capitalizeWords, capitalizeFirstLetter, formatData };

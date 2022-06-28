@@ -9,6 +9,8 @@ import {
   serializedArrClientSchema,
 } from "./client";
 
+import { createScheduleSchema } from "./schedule";
+
 export {
   // PROFESSIONAL
   createProfessionalSchema,
@@ -18,4 +20,6 @@ export {
   createClientSchema,
   serializedObjClientSchema,
   serializedArrClientSchema,
+  // SCHEDULE
+  createScheduleSchema,
 };
