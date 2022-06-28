@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  api:
+    container_name: evoluna-teste-API
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    expose:
+      - ${PORT}
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - pg
+    command: bash -c 'yarn migration:run && yarn dev'
+  pg:
+    container_name: evoluna-teste-DB
+    image: postgres
+    env_file:
+      - .env
+    expose:
+      - ${PGPORT}
+    ports:
+      - ${PGPORT}:${PGPORT}
