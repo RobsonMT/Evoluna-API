@@ -6,6 +6,7 @@ interface IScheduleRepository {
   save: (schedule: Partial<Schedule>) => Promise<Schedule>;
   findAll: () => Promise<Array<Schedule>>;
   findOne: (payload: object) => Promise<Schedule | null>;
+  search: (name: string, day: string) => Promise<Array<Schedule>>;
   update: (id: string, payload: Partial<Schedule>) => Promise<UpdateResult>;
   delete: (id: string) => Promise<DeleteResult>;
 }
@@ -33,6 +34,19 @@ class ScheduleRepository implements IScheduleRepository {
 
   findOne = async (payload: object) => {
     return await this.ormRepo.findOneBy({ ...payload });
+  };
+
+  search = async (name: string, day: string) => {
+    return await this.ormRepo
+      .createQueryBuilder("schedule")
+      .innerJoinAndSelect("schedule.formOfService", "formOfService")
+      .innerJoinAndSelect("schedule.professional", "professional")
+      .innerJoinAndSelect("schedule.client", "client")
+      .innerJoinAndSelect("schedule.time", "time")
+      .where("professional.name = :name", { name })
+      .andWhere("schedule.day = :day", { day })
+      .orderBy("schedule.day", "ASC")
+      .getMany();
   };
 
   update = async (id: string, payload: Partial<Schedule>) => {

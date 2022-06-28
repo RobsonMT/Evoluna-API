@@ -6,6 +6,11 @@ class TimeController {
     const times = await timeService.getTimes();
     return res.status(200).json(times);
   };
+
+  search = async (req: Request, res: Response) => {
+    const times = await timeService.search(req);
+    return res.status(200).json(times);
+  };
 }
 
 export default new TimeController();

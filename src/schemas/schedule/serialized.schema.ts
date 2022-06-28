@@ -9,7 +9,7 @@ const scheduleShape = {
     id: yup.string().required(),
   }),
   time: yup.object().shape({
-    name: yup.string().required(),
+    duration: yup.string().required(),
     id: yup.string().required(),
   }),
   professional: yup.object().shape({

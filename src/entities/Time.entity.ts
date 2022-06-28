@@ -6,5 +6,5 @@ export class Time {
   public id: string;
 
   @Column()
-  public name: string;
+  public duration: string;
 }

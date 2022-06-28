@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import ErrorHTTP from "../errors/ErrorHTTP";
+import { ErrorHTTP } from "../errors";
+
 import { clientRepo, professionalRepo } from "../repositories";
 
 const verifyEmailAndContactExist = async (

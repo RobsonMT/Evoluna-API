@@ -18,8 +18,7 @@ class TimeRepository implements ITimeRepository {
   }
 
   save = async (time: Partial<Time>) => {
-    await this.ormRepo.save(time);
-    return await this.ormRepo.findOneBy({ name: time.name });
+    return await this.ormRepo.save(time);
   };
 
   findAll: () => Promise<Array<Time>> = async () => {

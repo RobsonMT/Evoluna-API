@@ -15,6 +15,7 @@ class ProfessionalService {
 
   getProfessionals = async () => {
     const professionals = await professionalRepo.findAll();
+    
     return await serializedArrProfessionalSchema.validate(professionals, {
       stripUnknown: true,
     });

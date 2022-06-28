@@ -1,7 +1,8 @@
 import { Request } from "express";
+import { ErrorHTTP } from "../errors";
 import { clientRepo } from "../repositories";
 import { capitalizeFirstLetter, capitalizeWords, formatData } from "../utils";
-import ErrorHTTP from "../errors/ErrorHTTP";
+
 
 class ClientService {
   insertClient = async ({ validated }: Request) => {

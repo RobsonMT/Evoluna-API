@@ -1,6 +1,6 @@
 import { Router } from "express";
-import scheduleController from "../controllers/schedule.controller";
-import { validadeSchema } from "../middlewares";
+import { scheduleController } from "../controllers";
+import { validadeSchema, validateScheduleData } from "../middlewares";
 import { createScheduleSchema } from "../schemas";
 
 const router = Router();
@@ -8,6 +8,7 @@ const router = Router();
 router.post(
   "/schedule",
   validadeSchema(createScheduleSchema),
+  validateScheduleData,
   scheduleController.insertSchedule
 );
 

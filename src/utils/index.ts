@@ -20,4 +20,15 @@ const capitalizeFirstLetter = (str: string) => {
 const formatData = (data: Date | string) => {
   return data.toString().split("-").reverse().join("/");
 };
-export { reduceShape, capitalizeWords, capitalizeFirstLetter, formatData };
+
+const formatDataToDbFormat = (data: Date | string) => {
+  return data.toString().split("/").reverse().join("-");
+};
+
+export {
+  reduceShape,
+  capitalizeWords,
+  capitalizeFirstLetter,
+  formatData,
+  formatDataToDbFormat,
+};

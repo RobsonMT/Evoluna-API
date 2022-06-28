@@ -1,6 +1,6 @@
 import { Request } from "express";
-import ErrorHTTP from "../errors/ErrorHTTP";
 import { formatData } from "../utils";
+import { ErrorHTTP } from "../errors";
 import {
   clientRepo,
   formOfServiceRepo,
@@ -14,53 +14,21 @@ import {
 } from "../schemas/schedule/serialized.schema";
 
 class ScheduleService {
-  insertSchedule = async ({ validated }: Request) => {
-    try {
-      const formOfService = await formOfServiceRepo.findOne({
-        id: validated.formOfServiceId,
-      });
+  insertSchedule = async ({ validated, professional }: Request) => {
+    const times = await timeRepo.findAll();
+    const searchedSchedules = await scheduleRepo.search(
+      professional.name,
+      validated.day
+    );
 
-      if (!formOfService) {
-        throw new Error();
-      }
-    } catch (err: any) {
-      throw new ErrorHTTP(404, "formOfService not found");
-    }
+    const filteredTimes = times.filter(
+      (time) =>
+        searchedSchedules.filter((schedule) => schedule.time.id === time.id)
+          .length === 0
+    );
 
-    try {
-      const time = await timeRepo.findOne({
-        id: validated.timeId,
-      });
-
-      if (!time) {
-        throw new Error();
-      }
-    } catch (err: any) {
-      throw new ErrorHTTP(404, "Time not found");
-    }
-
-    try {
-      const professional = await professionalRepo.findOne({
-        id: validated.professionalId,
-      });
-
-      if (!professional) {
-        throw new Error();
-      }
-    } catch (err: any) {
-      throw new ErrorHTTP(404, "Professional not found");
-    }
-
-    try {
-      const client = await clientRepo.findOne({
-        id: validated.clientId,
-      });
-
-      if (!client) {
-        throw new Error();
-      }
-    } catch (err: any) {
-      throw new ErrorHTTP(404, "Client not found");
+    if (!filteredTimes.some((e) => e.id === validated.timeId)) {
+      throw new ErrorHTTP(409, "Time not available");
     }
 
     validated = Object.assign(validated, {
