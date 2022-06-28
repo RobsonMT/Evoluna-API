@@ -1,4 +1,4 @@
-import { Repository, UpdateResult } from "typeorm";
+import { DeleteResult, Repository, UpdateResult } from "typeorm";
 import AppDataSource from "../data-source";
 import { Client } from "../entities";
 
@@ -7,6 +7,7 @@ interface IClientRepository {
   findAll: () => Promise<Array<Client>>;
   findOne: (payload: object) => Promise<Client | null>;
   update: (id: string, payload: Partial<Client>) => Promise<UpdateResult>;
+  delete: (id: string) => Promise<DeleteResult>;
 }
 
 class ClientRepository implements IClientRepository {
@@ -31,6 +32,10 @@ class ClientRepository implements IClientRepository {
 
   update = async (id: string, payload: Partial<Client>) => {
     return await this.ormRepo.update(id, { ...payload });
+  };
+
+  delete = async (id: string) => {
+    return await this.ormRepo.delete(id);
   };
 }
 

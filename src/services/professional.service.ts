@@ -1,11 +1,10 @@
 import { Request } from "express";
+import { professionalRepo } from "../repositories";
+import { capitalize } from "../utils";
 import {
   serializedArrProfessionalSchema,
   serializedObjProfessionalSchema,
 } from "../schemas";
-import { professionalRepo } from "../repositories";
-import { capitalize } from "../utils";
-import { Professional } from "../entities";
 
 class ProfessionalService {
   insertProfessional = async ({ validated }: Request) => {
