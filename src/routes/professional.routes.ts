@@ -12,4 +12,6 @@ router.post(
   professionalController.insertProfessional
 );
 
+router.get("/professionals", professionalController.getProfessionals);
+
 export default router;

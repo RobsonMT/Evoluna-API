@@ -1,7 +1,11 @@
 import { Request } from "express";
-import { serializedObjProfessionalSchema } from "../schemas";
+import {
+  serializedArrProfessionalSchema,
+  serializedObjProfessionalSchema,
+} from "../schemas";
 import { professionalRepo } from "../repositories";
 import { capitalize } from "../utils";
+import { Professional } from "../entities";
 
 class ProfessionalService {
   insertProfessional = async ({ validated }: Request) => {
@@ -13,6 +17,13 @@ class ProfessionalService {
     const professional = await professionalRepo.save(validated);
 
     return await serializedObjProfessionalSchema.validate(professional, {
+      stripUnknown: true,
+    });
+  };
+
+  getProfessionals = async () => {
+    const professionals = await professionalRepo.findAll();
+    return await serializedArrProfessionalSchema.validate(professionals, {
       stripUnknown: true,
     });
   };
