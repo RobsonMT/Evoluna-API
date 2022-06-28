@@ -12,4 +12,6 @@ router.post(
   clientController.insertClient
 );
 
+router.get("/clients", clientController.getClients);
+
 export default router;

@@ -28,6 +28,22 @@ class ClientService {
       birthDate: client.birthDate.toString().split("-").reverse().join("/"),
     });
   };
+
+  getClients = async () => {
+    const clientsData = await clientRepo.findAll();
+
+    const clients = [];
+
+    for (let client of clientsData) {
+      clients.push(
+        Object.assign(client, {
+          birthDate: client.birthDate.toString().split("-").reverse().join("/"),
+        })
+      );
+    }
+
+    return clients;
+  };
 }
 
 export default new ClientService();
