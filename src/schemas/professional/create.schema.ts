@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { phoneRegex } from "../../utils";
+import { phoneRegex } from "../../validations";
 
 const createProfessionalSchema = yup.object().shape({
   name: yup.string().required(),

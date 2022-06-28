@@ -1,23 +1,16 @@
 import { Request } from "express";
 import { professionalRepo } from "../repositories";
-import { capitalize } from "../utils";
-import {
-  serializedArrProfessionalSchema,
-  serializedObjProfessionalSchema,
-} from "../schemas";
+import { capitalizeWords } from "../utils";
+import { serializedArrProfessionalSchema } from "../schemas";
 
 class ProfessionalService {
   insertProfessional = async ({ validated }: Request) => {
     validated = Object.assign(validated, {
-      name: capitalize(validated.name),
+      name: capitalizeWords(validated.name),
       email: validated.email.toLowerCase(),
     });
 
-    const professional = await professionalRepo.save(validated);
-
-    return await serializedObjProfessionalSchema.validate(professional, {
-      stripUnknown: true,
-    });
+    return await professionalRepo.save(validated);
   };
 
   getProfessionals = async () => {

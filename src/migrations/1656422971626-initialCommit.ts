@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class intialCommit1656407827421 implements MigrationInterface {
-    name = 'intialCommit1656407827421'
+export class initialCommit1656422971626 implements MigrationInterface {
+    name = 'initialCommit1656422971626'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "clients" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "fullName" character varying(50) NOT NULL, "email" character varying NOT NULL, "contact" character varying NOT NULL, "cpf" character varying(14) NOT NULL, "birthDate" date NOT NULL, "timeOfBirt" character varying(5) NOT NULL, "question" text NOT NULL, "birthCity" character varying NOT NULL, "lastBirthdayCity" character varying NOT NULL, CONSTRAINT "UQ_b48860677afe62cd96e12659482" UNIQUE ("email"), CONSTRAINT "UQ_31127ebf52553614f13e9debec1" UNIQUE ("contact"), CONSTRAINT "PK_f1ab7cf3a5714dbc6bb4e1c28a4" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "clients" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "fullName" character varying(50) NOT NULL, "email" character varying NOT NULL, "contact" character varying NOT NULL, "cpf" character varying NOT NULL, "birthDate" date NOT NULL, "timeOfBirth" character varying NOT NULL, "question" text NOT NULL, "birthCity" character varying NOT NULL, "lastBirthdayCity" character varying NOT NULL, CONSTRAINT "UQ_b48860677afe62cd96e12659482" UNIQUE ("email"), CONSTRAINT "UQ_31127ebf52553614f13e9debec1" UNIQUE ("contact"), CONSTRAINT "UQ_4245ac34add1ceeb505efc98777" UNIQUE ("cpf"), CONSTRAINT "PK_f1ab7cf3a5714dbc6bb4e1c28a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "formOfServices" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, CONSTRAINT "PK_1f23c306dae1e1d117d50038a02" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "times" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, CONSTRAINT "PK_21a9ce7a877cba720e30089638e" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "schedules" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "day" date NOT NULL, "formOfServiceId" uuid, "timeId" uuid, "professionalId" uuid, "clientId" uuid, CONSTRAINT "PK_7e33fc2ea755a5765e3564e66dd" PRIMARY KEY ("id"))`);

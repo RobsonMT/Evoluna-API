@@ -44,7 +44,6 @@
     "@types/yup": "^0.29.14",
     "jest": "^28.1.0",
     "sqlite3": "^5.0.8",
-    "ts-jest": "^28.0.4",
     "supertest": "^6.2.3",
     "ts-node": "10.7.0",
     "ts-node-dev": "^1.1.8",

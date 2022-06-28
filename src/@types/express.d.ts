@@ -1,10 +1,10 @@
-import { Professional } from "../entities";
+import { Client, Professional } from "../entities";
 
-type TValidated = Partial<Professional>;
+// type TValidated = Partial<Professional> | Partial<Client>;
 declare global {
   namespace Express {
     interface Request {
-      validated: TValidated;
+      validated: any;
     }
   }
 }

@@ -14,14 +14,14 @@ export class Client {
   @Column({ unique: true })
   public contact: string;
 
-  @Column("varchar", { length: 14 })
+  @Column({ unique: true })
   public cpf: string;
 
   @Column({ type: "date" })
   public birthDate: Date;
 
-  @Column("varchar", { length: 5 })
-  public timeOfBirt: string;
+  @Column()
+  public timeOfBirth: string;
 
   @Column({ type: "text" })
   public question: string;
