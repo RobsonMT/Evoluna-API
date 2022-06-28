@@ -1,5 +1,6 @@
 import { Request } from "express";
 import ErrorHTTP from "../errors/ErrorHTTP";
+import { formatData } from "../utils";
 import {
   clientRepo,
   formOfServiceRepo,
@@ -7,8 +8,10 @@ import {
   scheduleRepo,
   timeRepo,
 } from "../repositories";
-import { serializedObjScheduleSchema } from "../schemas/schedule/serialized.schema";
-import { formatData } from "../utils";
+import {
+  serializedArrScheduleSchema,
+  serializedObjScheduleSchema,
+} from "../schemas/schedule/serialized.schema";
 
 class ScheduleService {
   insertSchedule = async ({ validated }: Request) => {
@@ -80,6 +83,18 @@ class ScheduleService {
       }),
       { stripUnknown: true }
     );
+  };
+
+  getSchedules = async () => {
+    const schedulesData = await scheduleRepo.findAll();
+
+    for (let schedule of schedulesData) {
+      schedule.day = formatData(schedule.day) as string;
+    }
+
+    return await serializedArrScheduleSchema.validate(schedulesData, {
+      stripUnknown: true,
+    });
   };
 }
 

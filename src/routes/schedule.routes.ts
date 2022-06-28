@@ -11,4 +11,6 @@ router.post(
   scheduleController.insertSchedule
 );
 
+router.get("/schedules", scheduleController.getSchedules);
+
 export default router;
