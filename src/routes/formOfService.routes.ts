@@ -3,6 +3,6 @@ import { formOfServiceController } from "../controllers";
 
 const router = Router();
 
-router.get("/formOfServices", formOfServiceController.getFormsOfService);
+router.get("/formsOfService", formOfServiceController.getFormsOfService);
 
 export default router;

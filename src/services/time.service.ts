@@ -9,16 +9,16 @@ class TimeService {
   };
 
   search = async ({ query }: Request) => {
-    const prof = capitalizeWords(query.prof as string);
     const day = formatDataToDbFormat(query.day as string);
+    const profId = query.profId as string;
 
-    if (!prof || !day) {
+    if (!profId || !day) {
       throw new ErrorHTTP(404, "Missing query params");
     }
 
     const times = await timeRepo.findAll();
 
-    const searchedSchedules = await scheduleRepo.search(prof, day);
+    const searchedSchedules = await scheduleRepo.search(profId, day);
 
     const filteredTimes = times.filter(
       (time) =>

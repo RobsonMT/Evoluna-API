@@ -2,11 +2,7 @@ import { Request } from "express";
 import { formatData } from "../utils";
 import { ErrorHTTP } from "../errors";
 import {
-  clientRepo,
-  formOfServiceRepo,
-  professionalRepo,
-  scheduleRepo,
-  timeRepo,
+  scheduleRepo, timeRepo
 } from "../repositories";
 import {
   serializedArrScheduleSchema,
@@ -17,7 +13,7 @@ class ScheduleService {
   insertSchedule = async ({ validated, professional }: Request) => {
     const times = await timeRepo.findAll();
     const searchedSchedules = await scheduleRepo.search(
-      professional.name,
+      professional.id,
       validated.day
     );
 
