@@ -2,17 +2,17 @@
   "name": "evoluna-api",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:RobsonMT/Evoluna-Teste-API",
+  "repository": "git@github.com:RobsonMT/Evoluna-Teste-API.git",
   "author": "Robson Fernando <rbsndev3@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "18.3.x",
-    "npm": "8.1.x",
-    "yarn": "1.22.x"
+    "node": "18.3.0",
+    "npm": "8.11.0",
+    "yarn": "1.22.19"
   },
   "scripts": {
     "dev": "ts-node-dev --files --rs src/server.ts",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:create": "typeorm-ts-node-commonjs migration:create",
