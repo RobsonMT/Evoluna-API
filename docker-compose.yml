@@ -9,9 +9,9 @@ services:
     volumes:
       - ./src:/app/src
     expose:
-      - ${PORT}
+      - 3000
     ports:
-      - ${PORT}:${PORT}
+      - 3000:3000
     depends_on:
       - pg
     command: bash -c 'yarn migration:run && yarn dev'
@@ -21,6 +21,6 @@ services:
     env_file:
       - .env
     expose:
-      - ${PGPORT}
+      - 5432
     ports:
-      - ${PGPORT}:${PGPORT}
+      - 5432:5432

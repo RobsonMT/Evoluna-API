@@ -5,6 +5,6 @@ build/
 tmp/
 temp/
 *.lock
-dist
+dist/
 .env
 *lock.json
