@@ -23,7 +23,7 @@ export class Client {
   @Column()
   public timeOfBirth: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   public question: string;
 
   @Column()

@@ -28,7 +28,7 @@ const createClientSchema = yup.object().shape({
     .string()
     .matches(timeAMPMRegex, "TimeOfBirth format is not valid. EX: 03:00 AM | 03:00 PM")
     .required(),
-  question: yup.string().required(),
+  question: yup.string().optional().nullable(),
   birthCity: yup.string().required(),
   lastBirthdayCity: yup.string().required(),
 });

@@ -17,11 +17,12 @@ class ClientService {
       );
     }
 
-    validated = Object.assign(validated, {
-      fullName: capitalizeWords(validated.fullName),
-      email: validated.email.toLowerCase(),
-      question: capitalizeFirstLetter(validated.question),
-    });
+    validated.fullName = capitalizeWords(validated.fullName);
+    validated.email = validated.email.toLowerCase();
+
+    if (validated.question) {
+      validated.question = capitalizeFirstLetter(validated.question);
+    }
 
     const client = await clientRepo.save(validated);
 
