@@ -14,19 +14,19 @@ const createClientSchema = yup.object().shape({
   email: yup.string().email().required(),
   contact: yup
     .string()
-    .matches(phoneRegex, "Phone number format is not valid. EX (99) 99999-9999")
+    .matches(phoneRegex, "Phone number format is not valid. EX: (99) 99999-9999")
     .required(),
   cpf: yup
     .string()
-    .matches(cpfRegex, "Cpf number format is not valid. EX 000.000.000-00")
+    .matches(cpfRegex, "Cpf number format is not valid. EX: 000.000.000-00")
     .required(),
   birthDate: yup
     .string()
-    .matches(birthDateRegex, "BirthDate format is not valid. 12/12/2012")
+    .matches(birthDateRegex, "BirthDate format is not valid. EX: 12/12/2012")
     .required(),
   timeOfBirth: yup
     .string()
-    .matches(timeAMPMRegex, "BirthDate format is not valid. 12/12/2012")
+    .matches(timeAMPMRegex, "TimeOfBirth format is not valid. EX: 03:00 AM | 03:00 PM")
     .required(),
   question: yup.string().required(),
   birthCity: yup.string().required(),
