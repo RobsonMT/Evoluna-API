@@ -9,7 +9,7 @@ const clientShape = {
   cpf: yup.string().required(),
   birthDate: yup.string().required(),
   timeOfBirth: yup.string().required(),
-  question: yup.string().required(),
+  question: yup.string().optional().nullable(),
   birthCity: yup.string().required(),
   lastBirthdayCity: yup.string().required(),
 };

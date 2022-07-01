@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { formatData } from "../utils";
+import { formatData, formatDataToDbFormat } from "../utils";
 import { ErrorHTTP } from "../errors";
 import { scheduleRepo, timeRepo } from "../repositories";
 import {
@@ -25,6 +25,7 @@ class ScheduleService {
       throw new ErrorHTTP(409, "Time not available");
     }
 
+    validated.day = formatDataToDbFormat(validated.day);
     validated.formOfService = validated.formOfServiceId;
     validated.professional = validated.professionalId;
     validated.client = validated.clientId;
@@ -44,13 +45,13 @@ class ScheduleService {
   };
 
   getSchedules = async () => {
-    const schedulesData = await scheduleRepo.findAll();
+    const schedules = await scheduleRepo.findAll();
 
-    for (let schedule of schedulesData) {
-      schedule.day = formatData(schedule.day) as string;
+    for (let schedule of schedules) {
+      schedule.day = formatData(schedule.day);
     }
 
-    return await serializedArrScheduleSchema.validate(schedulesData, {
+    return await serializedArrScheduleSchema.validate(schedules, {
       stripUnknown: true,
     });
   };

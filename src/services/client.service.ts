@@ -2,6 +2,10 @@ import { Request } from "express";
 import { ErrorHTTP } from "../errors";
 import { clientRepo } from "../repositories";
 import {
+  serializedArrClientSchema,
+  serializedObjClientSchema,
+} from "../schemas";
+import {
   capitalizeFirstLetter,
   capitalizeWords,
   formatData,
@@ -27,29 +31,24 @@ class ClientService {
     validated.fullName = capitalizeWords(validated.fullName);
     validated.email = validated.email.toLowerCase();
 
-    console.log(validated.birthDate);
-
     const client = await clientRepo.save(validated);
+    client.birthDate = formatData(client.birthDate);
 
-    return Object.assign(client, {
-      birthDate: formatData(client.birthDate),
+    return serializedObjClientSchema.validate(client, {
+      stripUnknown: true,
     });
   };
 
   getClients = async () => {
-    const clientsData = await clientRepo.findAll();
+    const clients = await clientRepo.findAll();
 
-    const clients = [];
-
-    for (let client of clientsData) {
-      clients.push(
-        Object.assign(client, {
-          birthDate: formatData(client.birthDate) as string,
-        })
-      );
+    for (let client of clients) {
+      client.birthDate = formatData(client.birthDate);
     }
 
-    return clients;
+    return await serializedArrClientSchema.validate(clients, {
+      stripUnknown: true,
+    });
   };
 }
 

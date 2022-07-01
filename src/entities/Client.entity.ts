@@ -18,7 +18,7 @@ export class Client {
   public cpf: string;
 
   @Column({ type: "date" })
-  public birthDate: Date;
+  public birthDate: string;
 
   @Column()
   public timeOfBirth: string;
