@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { ErrorHTTP } from "../errors";
 import { scheduleRepo, timeRepo } from "../repositories";
-import { capitalizeWords, formatDataToDbFormat } from "../utils";
+import { formatDataToDbFormat } from "../utils";
 
 class TimeService {
   getTimes = async () => {

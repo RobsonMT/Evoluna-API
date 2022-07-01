@@ -1,9 +1,7 @@
 import { Request } from "express";
 import { formatData } from "../utils";
 import { ErrorHTTP } from "../errors";
-import {
-  scheduleRepo, timeRepo
-} from "../repositories";
+import { scheduleRepo, timeRepo } from "../repositories";
 import {
   serializedArrScheduleSchema,
   serializedObjScheduleSchema,
@@ -27,12 +25,10 @@ class ScheduleService {
       throw new ErrorHTTP(409, "Time not available");
     }
 
-    validated = Object.assign(validated, {
-      formOfService: validated.formOfServiceId,
-      time: validated.timeId,
-      professional: validated.professionalId,
-      client: validated.clientId,
-    });
+    validated.formOfService = validated.formOfServiceId;
+    validated.professional = validated.professionalId;
+    validated.client = validated.clientId;
+    validated.time = validated.timeId;
 
     delete validated.formOfServiceId;
     delete validated.timeId;
@@ -40,13 +36,11 @@ class ScheduleService {
     delete validated.clientId;
 
     const schedule = await scheduleRepo.save(validated);
+    schedule.day = formatData(schedule.day);
 
-    return await serializedObjScheduleSchema.validate(
-      Object.assign(schedule, {
-        day: formatData(schedule.day),
-      }),
-      { stripUnknown: true }
-    );
+    return await serializedObjScheduleSchema.validate(schedule, {
+      stripUnknown: true,
+    });
   };
 
   getSchedules = async () => {

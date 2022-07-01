@@ -1,8 +1,12 @@
 import { Request } from "express";
 import { ErrorHTTP } from "../errors";
 import { clientRepo } from "../repositories";
-import { capitalizeFirstLetter, capitalizeWords, formatData } from "../utils";
-
+import {
+  capitalizeFirstLetter,
+  capitalizeWords,
+  formatData,
+  formatDataToDbFormat,
+} from "../utils";
 
 class ClientService {
   insertClient = async ({ validated }: Request) => {
@@ -17,12 +21,13 @@ class ClientService {
       );
     }
 
+    validated.question &&
+      (validated.question = capitalizeFirstLetter(validated.question));
+    validated.birthDate = formatDataToDbFormat(validated.birthDate);
     validated.fullName = capitalizeWords(validated.fullName);
     validated.email = validated.email.toLowerCase();
 
-    if (validated.question) {
-      validated.question = capitalizeFirstLetter(validated.question);
-    }
+    console.log(validated.birthDate);
 
     const client = await clientRepo.save(validated);
 

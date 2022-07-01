@@ -13,5 +13,4 @@ registerRouters(app);
 
 app.use(errorHandling);
 
-
 export default app;

@@ -4,7 +4,7 @@ import { birthDateRegex } from "../../validations";
 const createScheduleSchema = yup.object().shape({
   day: yup
     .string()
-    .matches(birthDateRegex, "BirthDate format is not valid. 12/12/2012")
+    .matches(birthDateRegex, "Day format is not valid. EX: 12/12/2012")
     .required(),
   formOfServiceId: yup.string().uuid().required(),
   timeId: yup.string().uuid().required(),
